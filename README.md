@@ -1,1 +1,1 @@
-# misc-docusaurus
+# misc-docs
