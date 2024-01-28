@@ -16,9 +16,7 @@ base = "docusaurus"
 publish = "build"
 
 # Default build command.
-command = "yarn build && yarn install"
-
-ignore = "git diff --quiet $COMMIT_REF $CACHED_COMMIT_REF -- . ../../docs ../../netlify.toml"
+command = "yarn install && yarn run build"
 
 [[plugins]]
 # Installs the Lighthouse Build Plugin for all deploy contexts
