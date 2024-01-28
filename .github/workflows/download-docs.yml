@@ -16,12 +16,12 @@ jobs:
 
       - name: download latest version of gnolang/gno repository
         run: |
-          wget -o /tmp/gno.zip "https://github.com/gnolang/gno/archive/refs/heads/master.zip"
-          unzip -d /tmp/gno /tmp/gno.zip
+          wget -O /tmp/gno.zip "https://github.com/gnolang/gno/archive/refs/heads/master.zip"
+          unzip -d /tmp/ /tmp/gno.zip
 
       - name: Import docs directory
         run: |
-          cp -r /tmp/gno/docs ./docs
+          cp -r /tmp/gno-master/docs ./docs
 
       - name: Commit and push changes
         run: |
