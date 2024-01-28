@@ -1,0 +1,32 @@
+name: Download gno docs
+
+on:
+  workflow_dispatch: {}
+  push:
+	branches:
+	  - ci/download-docs
+
+jobs:
+  commit_docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout docs.gno.land repository
+        uses: actions/checkout@v4
+
+      - name: download latest version of gnolang/gno repository
+        run: |
+          wget -o /tmp/gno.zip "https://github.com/gnolang/gno/archive/refs/heads/master.zip"
+          unzip -d /tmp/gno /tmp/gno.zip
+
+      - name: Import docs directory
+        run: |
+          cp -r /tmp/gno/docs ./docs
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Copy directory from source repository"
+          git push
