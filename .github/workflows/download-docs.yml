@@ -3,8 +3,8 @@ name: Download gno docs
 on:
   workflow_dispatch: {}
   push:
-	branches:
-	  - ci/download-docs
+    branches:
+      - ci/download-docs
 
 jobs:
   commit_docs:
