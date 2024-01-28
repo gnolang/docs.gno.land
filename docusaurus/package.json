@@ -13,7 +13,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "embed": "for f in $(find ../../docs -name '*.md'); do embedmd -w $f; done\n"
+    "embed": "for f in $(find ../docs -name '*.md'); do embedmd -w $f; done\n"
   },
   "dependencies": {
     "@docusaurus/core": "2.4.1",
