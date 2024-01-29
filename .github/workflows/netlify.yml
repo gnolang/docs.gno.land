@@ -17,7 +17,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Check changes
-      uses: netlify/actions/build@master
+    - name: Deploy to netlify
+      uses: netlify/actions/cli@master
+      with:
+        args: deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
