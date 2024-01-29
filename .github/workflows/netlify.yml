@@ -23,6 +23,7 @@ jobs:
         node-version: 18.x
 
     - name: Build docs.gno.land
+      working-directory: ./docusaurus
       run: |
         yarn run download-docs
         yarn install
