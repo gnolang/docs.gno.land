@@ -1,0 +1,23 @@
+name: Deploy docs to netlify
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - ci/netlify
+
+
+jobs:
+  deploy-netlify:
+    name: deploy-to-netlify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: read
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Check changes
+      uses: netlify/actions/build@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
