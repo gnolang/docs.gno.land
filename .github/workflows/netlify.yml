@@ -20,7 +20,7 @@ jobs:
     - name: Deploy to netlify
       uses: netlify/actions/cli@master
       with:
-        args: deploy
+        args: deploy --site albttx-gno-docs --prod
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
