@@ -1,0 +1,37 @@
+name: Deploy docs to netlify
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-netlify:
+    name: deploy-to-netlify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: read
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+
+    - name: Build docs.gno.land
+      working-directory: ./docusaurus
+      run: |
+        yarn run download-docs
+        yarn install
+        yarn build
+
+    - name: Deploy to netlify
+      uses: netlify/actions/cli@master
+      with:
+        args: deploy --site gno-docs --prod
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
