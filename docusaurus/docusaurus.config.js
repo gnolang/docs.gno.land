@@ -64,6 +64,10 @@ const config = {
         },
         items: [
           {
+            type: "search",
+            position: "right",
+          },
+          {
             position: "left",
             label: "Home",
             to: "https://gno.land",
