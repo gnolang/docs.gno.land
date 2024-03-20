@@ -6,6 +6,11 @@ on:
     branches:
       - main
 
+env:
+  MEILISEARCH_URL: ${{ MEILISEARCH_URL }}
+  MEILISEARCH_API_KEY: ${{ MEILISEARCH_API_KEY }}
+  MEILISEARCH_INDEX_UID: ${{ MEILISEARCH_INDEX_UID}}
+
 jobs:
   deploy-netlify:
     name: deploy-to-netlify
