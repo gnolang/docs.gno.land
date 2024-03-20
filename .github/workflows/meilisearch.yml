@@ -1,0 +1,28 @@
+name: meilisearch
+
+on:
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ["Deploy docs to netlify"]
+    types:
+      - completed
+
+jobs:
+  indexing:
+    runs-on: ubuntu-latest
+    name: Indexing
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: 'meilisearch/scrapix'
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - run: yarn install
+
+      - run: yarn start -c "${SCRAPIX_CONFIG}"
+        env:
+          SCRAPIX_CONFIG: ${{ secrets.SCRAPIX_CONFIG }}
