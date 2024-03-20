@@ -31,7 +31,7 @@ jobs:
     - name: Deploy to netlify
       uses: netlify/actions/cli@master
       with:
-        args: deploy --site gno-docs --prod
+        args: deploy --site docs-gno-land --prod
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
