@@ -361,3 +361,10 @@ a.footer__link-item > svg {
 html .docsearch-modal-search-input-form {
   box-shadow: var(--ifm-color-secondary) 0px 0px 0px 2px inset;
 }
+
+.container img {
+  margin: auto;
+  display: block;
+  border-radius: 0.5rem;
+  margin-block: 3rem;
+}
