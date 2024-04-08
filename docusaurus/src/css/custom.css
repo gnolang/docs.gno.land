@@ -319,12 +319,27 @@ a.footer__link-item > svg {
 .footer .container {
   max-width: 100%;
   display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+@media (min-width: 580px) {
+  .footer .container {
+    flex-direction: row;
+  }
 }
 
 .footer__title {
   margin-block-start: 1rem;
 }
 
+.footer__links {
+  width: 100%;
+}
+@media (min-width: 580px) {
+  .footer__links {
+    width: 50%;
+  }
+}
 @media (min-width: 997px) {
   .footer .footer__col:first-child {
     max-width: var(--doc-sidebar-width);
@@ -333,7 +348,7 @@ a.footer__link-item > svg {
     padding-inline-start: 3.75rem;
   }
   .footer__links {
-    width: 80%;
+    width: 75%;
   }
 }
 
@@ -378,10 +393,22 @@ html .docsearch-modal-search-input-form {
   margin-block: 3rem;
 }
 
+/* Feedback Form */
 .feedback {
   position: relative;
-  width: 20%;
+  width: 100%;
 }
+@media (min-width: 580px) {
+  .feedback {
+    width: 50%;
+  }
+}
+@media (min-width: 997px) {
+  .feedback {
+    width: 25%;
+  }
+}
+
 .feedback__btn {
   border: 0;
   cursor: pointer;
@@ -398,7 +425,6 @@ html .docsearch-modal-search-input-form {
 }
 .feedback__form {
   position: relative;
-  z-index: 999;
   font-size: 1rem;
   border-radius: 1rem;
   padding: 1.5rem 1rem;
