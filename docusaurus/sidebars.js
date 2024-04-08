@@ -11,7 +11,7 @@ const sidebars = {
             items: [
                 'getting-started/playground-start',
                 {
-                    type: 'category',
+                    type: `category`,
                     label: 'Local Setup',
                     items: [
                         'getting-started/local-setup/local-setup',
@@ -34,7 +34,6 @@ const sidebars = {
                 'how-to-guides/deploy',
                 'how-to-guides/write-simple-dapp',
                 'how-to-guides/creating-grc20',
-                'how-to-guides/creating-grc721',
                 'how-to-guides/connect-from-go',
                 'how-to-guides/connect-wallet-dapp',
             ],
