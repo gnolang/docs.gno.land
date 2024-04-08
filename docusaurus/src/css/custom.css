@@ -385,6 +385,7 @@ html .docsearch-modal-search-input-form {
 .feedback__btn {
   border: 0;
   cursor: pointer;
+  color: var(--ifm-footer-link-color);
   border-radius: 0.5rem;
   padding: 0.5rem 0.8rem;
   font-size: 1rem;
@@ -399,12 +400,9 @@ html .docsearch-modal-search-input-form {
   position: relative;
   z-index: 999;
   font-size: 1rem;
-  /* top: 50%;
-  left: 50%; */
   border-radius: 1rem;
   padding: 1.5rem 1rem;
   background-color: var(--btn-background);
-  /* transform: translate(-50%, -50%); */
 }
 .feedback__field {
   display: flex;
