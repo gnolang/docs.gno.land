@@ -441,6 +441,7 @@ html .docsearch-modal-search-input-form {
   border: none;
   border-radius: 0.4rem;
   outline: none;
+  font-family: inherit;
 }
 .feedback__inner-btn {
   padding: 0.5rem;
@@ -449,6 +450,10 @@ html .docsearch-modal-search-input-form {
   border-radius: 0.4rem;
   font-size: 1rem;
   background-color: var(--ifm-background-color);
+  transition: 0.3s ease opacity;
+}
+.feedback__inner-btn:hover {
+  opacity: 0.7;
 }
 .feedback__close {
   position: absolute;
