@@ -442,6 +442,7 @@ html .docsearch-modal-search-input-form {
   border-radius: 0.4rem;
   outline: none;
   font-family: inherit;
+  resize: vertical;
 }
 .feedback__inner-btn {
   padding: 0.5rem;
