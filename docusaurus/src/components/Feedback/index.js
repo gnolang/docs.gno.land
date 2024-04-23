@@ -27,7 +27,7 @@ export default function Feedback() {
     }));
   };
 
-  const sendData = (e) => {
+  const sendData = async (e) => {
     e.preventDefault();
 
     const formURL = `https://docs.google.com/forms/d/188U6r1PL0zvwo5nrBwpIh8CVtgvOMdvst2YM3PWT7hw/formResponse`;
@@ -44,6 +44,19 @@ export default function Feedback() {
     }
 
     formParams.append(inputsName.pageId, window.location.pathname);
+
+    const editLink = document.querySelector(".theme-edit-this-page").getAttribute("href");
+    const filePath = editLink.split("master/")[1];
+
+    await fetch(`https://api.github.com/repos/gnolang/gno/commits?path=/${filePath}`)
+      .then((res) => res.json())
+      .then((data) => {
+        formParams.append(inputsName.pageCommit, data[0].sha);
+      })
+      .catch((error) => {
+        formParams.append(inputsName.pageCommit, `error: ${error}`);
+        console.error("Last page commit error :", error);
+      });
 
     const url = formURL + "?" + formParams + "&submit=Submit";
 
