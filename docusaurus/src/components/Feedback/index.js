@@ -92,7 +92,7 @@ export default function Feedback() {
           <div>
             <div className="feedback__field">
               <label htmlFor="feedback-email">Email</label>
-              <input type="email" name="email" id="feedback-email" placeholder="albert@email.com" value={formData.email} onChange={handleInputChange} required />
+              <input type="email" name="email" id="feedback-email" placeholder="example@domain.com" value={formData.email} onChange={handleInputChange} required />
             </div>
             <div className="feedback__field">
               <label htmlFor="feedback-review">Review</label>
