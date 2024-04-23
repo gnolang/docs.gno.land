@@ -23,9 +23,9 @@ const config = {
   },
 
   customFields: {
-    meilisearchURL: process.env.MEILISEARCH_URL || 'localhost:7700',
-    meilisearchApiKey: process.env.MEILISEARCH_API_KEY || 'masterKey',
-    meilisearchIndexUid: process.env.MEILISEARCH_INDEX_UID || 'dev'
+    meilisearchURL: process.env.MEILISEARCH_URL || "localhost:7700",
+    meilisearchApiKey: process.env.MEILISEARCH_API_KEY || "masterKey",
+    meilisearchIndexUid: process.env.MEILISEARCH_INDEX_UID || "dev",
   },
 
   scripts: [

@@ -36,6 +36,7 @@
   --ifm-links-hover-background-color: var(--ifm-color-primary-light);
   --ifm-color-secondary: var(--ifm-color-primary-light);
   --ifm-color-white: var(--ifm-color-primary);
+  --btn-background: var(--ifm-color-primary-lighter);
 
   --ifm-menu-link-sublist-icon: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zLjk2OTY3IDE1LjUzMDNDMy42NzY3OCAxNS4yMzc0IDMuNjc2NzggMTQuNzYyNiAzLjk2OTY3IDE0LjQ2OTdMMTEuNDY5NyA2Ljk2OTY3QzExLjc2MjYgNi42NzY3OCAxMi4yMzc0IDYuNjc2NzggMTIuNTMwMyA2Ljk2OTY3TDIwLjAzMDMgMTQuNDY5N0MyMC4zMjMyIDE0Ljc2MjYgMjAuMzIzMiAxNS4yMzc0IDIwLjAzMDMgMTUuNTMwM0MxOS43Mzc0IDE1LjgyMzIgMTkuMjYyNiAxNS44MjMyIDE4Ljk2OTcgMTUuNTMwM0wxMiA4LjU2MDY2TDUuMDMwMzMgMTUuNTMwM0M0LjczNzQ0IDE1LjgyMzIgNC4yNjI1NiAxNS44MjMyIDMuOTY5NjcgMTUuNTMwM1oiIGZpbGw9IiMxQzFDMUMiLz4KPC9zdmc+Cg==");
   --content-max-w: 50rem;
@@ -49,6 +50,8 @@
   --docsearch-searchbox-shadow: var(--ifm-color-primary-light) !important;
   --docsearch-searchbox-focus-background: var(--ifm-color-primary-lighter) !important;
   --docsearch-hit-color: var(--ifm-color-primary) !important;
+  --docsearch-searchbox-background: var(--ifm-color-primary-lighter) !important;
+  --docsearch-muted-color: var(--ifm-color-primary-light);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -71,7 +74,9 @@
   --ifm-links-background-color: var(--ifm-color-primary-darker);
   --ifm-links-hover-background-color: var(--ifm-color-primary-light);
   --docsearch-primary-color: var(--ifm-color-primary-light);
-
+  --btn-background: var(--ifm-color-primary-darker);
+  --docsearch-searchbox-background: var(--ifm-color-primary-dark) !important;
+  --docsearch-muted-color: var(--ifm-color-primary-light);
   --docsearch-searchbox-focus-background: var(--docusaurus-highlighted-code-line-bg) !important;
 }
 
@@ -313,18 +318,37 @@ a.footer__link-item > svg {
 
 .footer .container {
   max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+@media (min-width: 580px) {
+  .footer .container {
+    flex-direction: row;
+  }
 }
 
 .footer__title {
   margin-block-start: 1rem;
 }
 
+.footer__links {
+  width: 100%;
+}
+@media (min-width: 580px) {
+  .footer__links {
+    width: 50%;
+  }
+}
 @media (min-width: 997px) {
   .footer .footer__col:first-child {
     max-width: var(--doc-sidebar-width);
   }
   .footer .footer__col:nth-child(2) {
     padding-inline-start: 3.75rem;
+  }
+  .footer__links {
+    width: 75%;
   }
 }
 
@@ -367,4 +391,83 @@ html .docsearch-modal-search-input-form {
   display: block;
   border-radius: 0.5rem;
   margin-block: 3rem;
+}
+
+/* Feedback Form */
+.feedback {
+  position: relative;
+  width: 100%;
+}
+@media (min-width: 580px) {
+  .feedback {
+    width: 50%;
+  }
+}
+@media (min-width: 997px) {
+  .feedback {
+    width: 25%;
+  }
+}
+
+.feedback__btn {
+  border: 0;
+  cursor: pointer;
+  color: var(--ifm-footer-link-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  transition: 0.3s ease opacity;
+  box-shadow: var(--ring-offset-shadow, 0 0 #0000), var(--ring-shadow, 0 0 #0000), var(--shadow);
+  background-color: var(--btn-background);
+}
+.feedback__btn:hover {
+  opacity: 0.7;
+}
+.feedback__form {
+  position: relative;
+  font-size: 1rem;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  background-color: var(--btn-background);
+}
+.feedback__field {
+  display: flex;
+  flex-direction: column;
+  margin-block: 0.8rem;
+}
+.feedback__field input,
+.feedback__field textarea {
+  padding: 0.5rem 0.8rem;
+  border: none;
+  border-radius: 0.4rem;
+  outline: none;
+  font-family: inherit;
+}
+.feedback__inner-btn {
+  padding: 0.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  background-color: var(--ifm-background-color);
+  transition: 0.3s ease opacity;
+}
+.feedback__inner-btn:hover {
+  opacity: 0.7;
+}
+.feedback__close {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  top: 1rem;
+  right: 1rem;
+}
+
+.feedback__send {
+  width: 100%;
+  margin-block-start: 1rem;
+  font-weight: bold;
 }
