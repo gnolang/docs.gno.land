@@ -15,7 +15,7 @@ export default function Feedback() {
 
   const feedbackMsg = {
     info: "Leave feedback",
-    callback: "Thank you for your feedback",
+    callback: "Thank you for your feedback! ❤️",
   };
 
   const handleInputChange = (event) => {
