@@ -30,6 +30,8 @@ export default function Feedback() {
   const sendData = async (e) => {
     e.preventDefault();
 
+    if (formData.email === "" || formData.feedback === "") return;
+
     const formURL = `https://docs.google.com/forms/d/188U6r1PL0zvwo5nrBwpIh8CVtgvOMdvst2YM3PWT7hw/formResponse`;
     const inputsName = {
       email: "entry.331557816",
@@ -90,11 +92,11 @@ export default function Feedback() {
           <div>
             <div className="feedback__field">
               <label htmlFor="feedback-email">Email</label>
-              <input type="email" name="email" id="feedback-email" placeholder="albert@email.com" value={formData.email} onChange={handleInputChange} />
+              <input type="email" name="email" id="feedback-email" placeholder="albert@email.com" value={formData.email} onChange={handleInputChange} required />
             </div>
             <div className="feedback__field">
               <label htmlFor="feedback-review">Review</label>
-              <textarea type="text" name="feedback" id="feedback-review" placeholder="Your review here" rows="6" value={formData.feedback} onChange={handleInputChange} />
+              <textarea type="text" name="feedback" id="feedback-review" placeholder="Your review here" rows="6" value={formData.feedback} onChange={handleInputChange} required />
             </div>
             <button className="feedback__inner-btn feedback__send" type="submit">
               Send Feedback
