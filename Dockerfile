@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . .
 
+RUN rm -rf build docs
+
 WORKDIR /app/docusaurus
 
 RUN yarn install
