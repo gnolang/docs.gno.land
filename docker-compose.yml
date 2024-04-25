@@ -1,9 +1,8 @@
 version: "3"
 
-# gnolang/docs.gno.land
 services:
   docusaurus:
-    image: ghcr.io/gnolang/docs.gno.land:latest-dev
+    image: ghcr.io/gnolang/docs.gno.land:dev
     build:
       context: .
     volumes:
