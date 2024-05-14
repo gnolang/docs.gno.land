@@ -9,18 +9,18 @@ const sidebars = {
             label: 'Getting Started',
             link: {type: 'doc', id: 'getting-started/getting-started'},
             items: [
-                'getting-started/playground-start',
                 {
                     type: 'category',
                     label: 'Local Setup',
+                    link: {type: 'doc', id: 'getting-started/local-setup/local-setup'},
                     items: [
-                        'getting-started/local-setup/local-setup',
+                        'getting-started/local-setup/installation',
                         'getting-started/local-setup/working-with-key-pairs',
-                        'getting-started/local-setup/premining-balances',
-                        'getting-started/local-setup/setting-up-a-local-chain',
-                        'getting-started/local-setup/browsing-gno-source-code',
+                        'getting-started/local-setup/browsing-gnoland',
+                        'getting-started/local-setup/interacting-with-gnoland',
                     ]
                 },
+                'getting-started/playground-start',
             ],
         },
         {
