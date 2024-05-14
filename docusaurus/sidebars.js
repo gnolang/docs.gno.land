@@ -53,7 +53,7 @@ const sidebars = {
                     items: [
                         'concepts/stdlibs/banker',
                         'concepts/stdlibs/coin',
-                        'concepts/stdlibs/event',
+                        'concepts/stdlibs/events',
                         'concepts/stdlibs/gnopher-hole-stdlib',
                     ]
                 },
