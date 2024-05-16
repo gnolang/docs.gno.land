@@ -71,6 +71,14 @@ const sidebars = {
         },
         {
             type: 'category',
+            label: 'Gno Infra',
+            link: {type: 'doc', id: 'gno-infra/gno-infra'},
+            items: [
+                'gno-infra/setting-up-a-faucet',
+            ],
+        },
+        {
+            type: 'category',
             label: 'Gno Tooling',
             link: {type: 'doc', id: 'gno-tooling/gno-tooling'},
             items: [
@@ -78,14 +86,7 @@ const sidebars = {
                 'gno-tooling/cli/gno-tooling-gnokey',
                 'gno-tooling/cli/gno-tooling-gnodev',
                 'gno-tooling/cli/gno-tooling-gnoland',
-                {
-                    type: 'category',
-                    label: 'gnofaucet',
-                    link: {type: 'doc', id: 'gno-tooling/cli/faucet/gno-tooling-gnofaucet'},
-                    items: [
-                        'gno-tooling/cli/faucet/running-a-faucet',
-                    ]
-                },
+                'gno-tooling/cli/gno-tooling-tm2-faucet',
             ]
         },
         {
