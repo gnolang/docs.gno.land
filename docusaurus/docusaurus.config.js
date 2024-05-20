@@ -60,7 +60,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: "img/og.jpg",
+      image: "img/og-gnoland.png",
       navbar: {
         hideOnScroll: true,
         logo: {
