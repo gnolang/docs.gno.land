@@ -35,3 +35,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+        MEILISEARCH_URL: "https://docs-search.gnoteam.com"
+        MEILISEARCH_INDEX_UID: "production"
+        MEILISEARCH_API_KEY: "22a22f25327d4bff5be707fa7ee90a731e6b6c8c5a6f13c705dafcce642caafd"
