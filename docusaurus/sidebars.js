@@ -90,6 +90,15 @@ const sidebars = {
         },
         {
             type: 'category',
+            label: 'Gno Infra',
+            link: {type: 'doc', id: 'gno-infra/gno-infra'},
+            items: [
+                'gno-infra/setting-up-a-local-chain',
+                'gno-infra/premining-balances',
+            ],
+        },
+        {
+            type: 'category',
             label: 'Reference',
             link: {type: 'doc', id: 'reference/reference'},
             items: [
