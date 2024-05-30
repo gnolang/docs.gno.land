@@ -340,11 +340,17 @@ a.footer__link-item > svg {
   width: 8rem;
 }
 
+[data-theme="light"] .footer .logo_img .logo-hat {
+  fill: #226c57;
+}
+[data-theme="dark"] .footer .logo_img .logo-hat {
+  fill: #ffffff;
+}
 [data-theme="light"] .footer .logo_img .logo-beard {
   fill: #9e9e9e;
 }
 [data-theme="dark"] .footer .logo_img .logo-beard {
-  fill: #ffffff;
+  fill: #808080;
 }
 [data-theme="dark"] .footer .logo_img .logo-wording path {
   fill: #ffffff;
