@@ -61,6 +61,10 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: "img/og-gnoland.png",
+      colorMode: {
+        defaultMode: "dark",
+        respectPrefersColorScheme: true,
+      },
       navbar: {
         hideOnScroll: true,
         logo: {
