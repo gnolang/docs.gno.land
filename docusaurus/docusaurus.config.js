@@ -95,6 +95,11 @@ const config = {
           },
           {
             position: "left",
+            label: "Faucet Hub",
+            to: "https://faucet.gno.land",
+          },
+          {
+            position: "left",
             label: "Blog",
             to: "https://gno.land/r/gnoland/blog",
           },
