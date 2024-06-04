@@ -71,14 +71,6 @@ const sidebars = {
         },
         {
             type: 'category',
-            label: 'Gno Infra',
-            link: {type: 'doc', id: 'gno-infra/gno-infra'},
-            items: [
-                'gno-infra/setting-up-a-faucet',
-            ],
-        },
-        {
-            type: 'category',
             label: 'Gno Tooling',
             link: {type: 'doc', id: 'gno-tooling/gno-tooling'},
             items: [
@@ -96,6 +88,7 @@ const sidebars = {
             items: [
                 'gno-infrastructure/setting-up-a-local-chain',
                 'gno-infrastructure/premining-balances',
+                'gno-infrastructure/setting-up-a-faucet',
             ],
         },
         {
