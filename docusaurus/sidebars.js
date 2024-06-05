@@ -36,6 +36,7 @@ const sidebars = {
                 'how-to-guides/creating-grc20',
                 'how-to-guides/connect-from-go',
                 'how-to-guides/connect-wallet-dapp',
+                'how-to-guides/port-solidity-to-gno',
             ],
         },
         {
