@@ -94,7 +94,17 @@ const sidebars = {
             label: 'Gno Infrastructure',
             link: {type: 'doc', id: 'gno-infrastructure/gno-infrastructure'},
             items: [
-                'gno-infrastructure/setting-up-a-local-chain',
+                {
+                    type: 'category',
+                    label: 'Validators',
+                    link: {type: 'doc', id: 'gno-infrastructure/validators/validators-overview'},
+                    items: [
+                        'gno-infrastructure/validators/validators-setting-up-a-new-chain',
+                        'gno-infrastructure/validators/validators-connect-to-and-existing-gno-chain',
+                        'gno-infrastructure/validators/validators-running-a-validator',
+                        'gno-infrastructure/validators/validators-faq',
+                    ]
+                },
                 'gno-infrastructure/premining-balances',
             ],
         },
