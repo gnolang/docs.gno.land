@@ -165,10 +165,7 @@ const sidebars = {
                     type: 'category',
                     label: 'gnoclient',
                     link: {type: 'doc', id: 'reference/gnoclient/gnoclient'},
-                    items: [
-                        'reference/gnoclient/signer',
-                        'reference/gnoclient/client'
-                    ]
+                    items: []
                 },
             ],
         },
