@@ -128,6 +128,7 @@ const sidebars = {
                                 'reference/stdlibs/std/banker',
                                 'reference/stdlibs/std/coin',
                                 'reference/stdlibs/std/coins',
+                                'reference/stdlibs/std/realm',
                                 'reference/stdlibs/std/chain',
                                 'reference/stdlibs/std/testing',
                             ]
