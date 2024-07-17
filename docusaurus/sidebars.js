@@ -46,7 +46,7 @@ const sidebars = {
             items: [
                 'concepts/realms',
                 'concepts/packages',
-                'concepts/namespaces',
+                'concepts/package-paths',
                 {
                     type: 'category',
                     label: 'Standard Libraries',
