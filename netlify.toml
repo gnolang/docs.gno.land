@@ -8,6 +8,8 @@ command = "yarn run download-docs && yarn build && yarn install"
 [context.production.environment]
 MEILISEARCH_URL = "https://docs-search.gnoteam.com"
 MEILISEARCH_INDEX_UID = "production"
+# To generate this token, exec
+#curl https://docs-search.gnoteam.com/keys -H "Authorization: Bearer $MEILI_MASTER_KEY"       
 MEILISEARCH_API_KEY = "6d7b970053413ade30e07212c7d36c7cdea3f47ede2e63e1147317f8718e65e1"
 
 [[plugins]]
