@@ -8,7 +8,7 @@ command = "yarn run download-docs && yarn build && yarn install"
 [context.production.environment]
 MEILISEARCH_URL = "https://docs-search.gnoteam.com"
 MEILISEARCH_INDEX_UID = "production"
-MEILISEARCH_API_KEY = "22a22f25327d4bff5be707fa7ee90a731e6b6c8c5a6f13c705dafcce642caafd"
+MEILISEARCH_API_KEY = "6d7b970053413ade30e07212c7d36c7cdea3f47ede2e63e1147317f8718e65e1"
 
 [[plugins]]
 package = "@netlify/plugin-lighthouse"
