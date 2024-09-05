@@ -77,7 +77,7 @@ const sidebars = {
             items: [
                 'gno-tooling/cli/gno-tooling-gno',
                 {
-                    type: 'category',
+                    type: "category",
                     label: 'gnokey',
                     link: {type: 'doc', id: 'gno-tooling/cli/gnokey/gnokey'},
                     items: [
