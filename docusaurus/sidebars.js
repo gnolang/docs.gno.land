@@ -15,8 +15,8 @@ const sidebars = {
                     link: {type: 'doc', id: 'getting-started/local-setup/local-setup'},
                     items: [
                         'getting-started/local-setup/installation',
-                        'getting-started/local-setup/working-with-key-pairs',
                         'getting-started/local-setup/browsing-gnoland',
+                        'getting-started/local-setup/creating-a-keypair',
                         'getting-started/local-setup/interacting-with-gnoland',
                     ]
                 },
@@ -76,7 +76,17 @@ const sidebars = {
             link: {type: 'doc', id: 'gno-tooling/gno-tooling'},
             items: [
                 'gno-tooling/cli/gno-tooling-gno',
-                'gno-tooling/cli/gno-tooling-gnokey',
+                {
+                    type: 'category',
+                    label: 'gnokey',
+                    link: {type: 'doc', id: 'gno-tooling/cli/gnokey/gnokey'},
+                    items: [
+                        'gno-tooling/cli/gnokey/working-with-key-pairs',
+                        'gno-tooling/cli/gnokey/state-changing-calls',
+                        'gno-tooling/cli/gnokey/querying-a-network',
+                        'gno-tooling/cli/gnokey/full-security-tx',
+                    ]
+                },
                 'gno-tooling/cli/gno-tooling-gnodev',
                 'gno-tooling/cli/gno-tooling-gnoland',
                 {
