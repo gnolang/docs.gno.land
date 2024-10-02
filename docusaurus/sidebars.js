@@ -89,14 +89,7 @@ const sidebars = {
                 },
                 'gno-tooling/cli/gno-tooling-gnodev',
                 'gno-tooling/cli/gno-tooling-gnoland',
-                {
-                    type: 'category',
-                    label: 'gnofaucet',
-                    link: {type: 'doc', id: 'gno-tooling/cli/faucet/gno-tooling-gnofaucet'},
-                    items: [
-                        'gno-tooling/cli/faucet/running-a-faucet',
-                    ]
-                },
+                'gno-tooling/cli/gno-tooling-tm2-faucet',
             ]
         },
         {
@@ -116,6 +109,7 @@ const sidebars = {
                     ]
                 },
                 'gno-infrastructure/premining-balances',
+                'gno-infrastructure/setting-up-a-faucet',
             ],
         },
         {
