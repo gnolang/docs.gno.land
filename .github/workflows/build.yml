@@ -21,12 +21,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Run download-docs script
-        run: |
-          chmod +x ./scripts/download-docs.sh
-          ./scripts/download-docs.sh
-        shell: bash
-
       - name: Install Docusaurus Dependencies
         run: |
           cd docusaurus
