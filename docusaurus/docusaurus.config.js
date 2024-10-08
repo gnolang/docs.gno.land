@@ -45,7 +45,6 @@ const config = {
         docs: {
           path: "../docs",
           routeBasePath: "/",
-          sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
           editUrl: ({ docPath }) => `https://github.com/gnolang/gno/edit/master/docs/${docPath}`,
         },
@@ -81,12 +80,6 @@ const config = {
             position: "left",
             label: "Home",
             to: "https://gno.land",
-          },
-          {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            position: "left",
-            label: "Docs",
           },
           {
             position: "left",
@@ -141,7 +134,7 @@ const config = {
                   </div>
 
                   <div class="gno-footer__copy">
-                    Made with ♡ by the humans at <a href='https://gno.land'>Gno.land</a>
+                    Made with ♡ by the humans at <a href='https://gno.land'>gno.land</a>
                   </div>
 
                   <div class="gno-footer__socials">
@@ -195,8 +188,8 @@ const config = {
                 href: "https://gno-by-example.com/",
               },
               {
-                label: "Awesome GNO",
-                href: "https://github.com/gnolang/awesome-gno",
+                label: "awesome-gno",
+                href: "https://github.com/gnoverse/awesome-gno",
               },
             ],
           },
