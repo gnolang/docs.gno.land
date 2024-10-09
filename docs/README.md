@@ -37,10 +37,12 @@ Welcome to the official gno.land documentation! Find the docs index below.
   - gno.land networks*
   - Tendermint2 overview*
   - GnoVM overview*
+  - Portal Loop*
 
 ## Misc (better name or make into a no-name section)
   - Glossary*
   - FAQ*
+  - Effective Gno
   - gnolang/workshops
   - awesome-gno
   - Links (events calendar, discord, telegram, youtube)
@@ -49,7 +51,7 @@ Welcome to the official gno.land documentation! Find the docs index below.
   - Network config
   - Go-Gno compat
   - `std` reference
-  - Clients & Tools
+  - Clients & Tools (links)
     - gnoclient
     - tm2-js
     - gno-js
