@@ -3,20 +3,20 @@
 Welcome to the official gno.land documentation! Find the docs index below. 
 
 ## Getting Started
-- ### [Intro to blockchains](01-getting-started/01-intro-to-blockchains.md)*
-- ### [What is gno.land & Gno?](01-getting-started/10-what-is-gnoland-gno.md)*
-- ### [Why gno.land & Gno?](01-getting-started/20-why-gnoland-gno.md)*
-- ### [Exploring gno.land (intro to gnoweb)](01-getting-started/30-exploring-gnoland.md)*
-- ### Getting started with Gno - Counter*
-- ### Developing locally
-  - #### Setup & installation
-  - #### gnokey - Creating a keypair
-  - #### gno - Running & testing your code*
-  - #### gnodev - Running a local development node*
-  - #### Full development flow - intermediate Gno example* (showcasing std, p/demo, r/demo)
-- ### Deploying to a gno.land network (gnokey + playground)*
-- ### Becoming a Gnome (contributor)*
-- ### Registering a namespace
+- [Intro to blockchains](01-getting-started/01-intro-to-blockchains.md)*
+- [What is gno.land & Gno?](01-getting-started/10-what-is-gnoland-gno.md)*
+- [Why gno.land & Gno?](01-getting-started/20-why-gnoland-gno.md)*
+- [Exploring gno.land (intro to gnoweb)](01-getting-started/30-exploring-gnoland.md)*
+- Getting started with Gno - Counter*
+- Developing locally
+  - Setup & installation
+  - gnokey - Creating a keypair
+  - gno - Running & testing your code*
+  - gnodev - Running a local development node*
+  - Full development flow - intermediate Gno example* (showcasing std, p/demo, r/demo)
+- Deploying to a gno.land network (gnokey + playground)*
+- Becoming a Gnome (contributor)*
+- Registering a namespace
 ## Guides
   - Using `gnokey`
     - 4 of the existing tutorials
