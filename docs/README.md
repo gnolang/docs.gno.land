@@ -13,10 +13,10 @@ Welcome to the official gno.land documentation! Find the docs index below.
   - #### gnokey - Creating a keypair
   - #### gno - Running & testing your code*
   - #### gnodev - Running a local development node*
-  - #### Full development flow - intermediate Gno example* (showcasing std)
+  - #### Full development flow - intermediate Gno example* (showcasing std, p/demo, r/demo)
 - ### Deploying to a gno.land network (gnokey + playground)*
 - ### Becoming a Gnome (contributor)*
-
+- ### Registering a namespace
 ## Guides
   - Using `gnokey`
     - 4 of the existing tutorials
