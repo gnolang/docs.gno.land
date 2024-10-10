@@ -4,8 +4,7 @@ Welcome to the official gno.land documentation! Find the docs index below.
 
 ## Getting Started
 - [Intro to blockchains](01-getting-started/01-intro-to-blockchains.md)*
-- [What is gno.land & Gno?](01-getting-started/10-what-is-gnoland-gno.md)*
-- [Why gno.land & Gno?](01-getting-started/20-why-gnoland-gno.md)*
+- [What is gno.land & Gno? Why build with it?](01-getting-started/10-what-why-gnoland-gno.md)*
 - [Exploring gno.land (intro to gnoweb)](01-getting-started/30-exploring-gnoland.md)*
 - Getting started with Gno - Counter*
 - Developing locally
@@ -17,12 +16,12 @@ Welcome to the official gno.land documentation! Find the docs index below.
 - Deploying to a gno.land network (gnokey + playground)*
 - Becoming a Gnome (contributor)*
 - Registering a namespace
+
 ## Guides
   - Using `gnokey`
     - 4 of the existing tutorials
   - Using `gnodev` - Full feature showcase
-  - Using `gno` - Testing & running code* (possibly merge with the item below)
-  - Manipulating the testing context (std.TestSet...)*
+  - Using `gno` - Gno unit tests (covering context manipulation, uassert & urequire,...)
   - Manipulating native coins (using the TM2 Banker)*
   - [Gno examples](https://github.com/gnolang/gno/tree/master/examples)
   - Creating a GRC20 token*
