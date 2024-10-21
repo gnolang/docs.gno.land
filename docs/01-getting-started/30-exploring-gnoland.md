@@ -3,6 +3,8 @@
 gno.land can host two types of code: smart contracts, called realms,
 and libraries, called pure packages.
 
+ 
+
 Realms can contain and manage state, while pure packages are used for creating
 reusable functionality, hence they are _pure_.
 
