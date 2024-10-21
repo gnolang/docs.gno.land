@@ -18,45 +18,43 @@ Welcome to the official gno.land documentation! Find the docs index below.
 - ### Registering a namespace
 
 ## Guides
-  - Using `gnokey`
-    - 4 of the existing tutorials
-  - Using `gnodev` - Full feature showcase
-  - Using `gno` - Gno unit tests (covering context manipulation, uassert & urequire,...)
-  - Manipulating native coins (using the TM2 Banker)
-  - [Gno examples](https://github.com/gnolang/gno/tree/master/examples)
-  - Creating a GRC20 token
-  - Connecting a Go app to gno.land
-  - Connecting a JS/TS app to gno.land
-
+  - ### Using `gnokey`
+    - #### 4 of the existing tutorials
+  - ### Using `gnodev` - Full feature showcase
+  - ### Using `gno` - Gno unit tests (covering context manipulation, uassert & urequire,...)
+  - ### Manipulating native coins (using the TM2 Banker)
+  - ### [Gno examples](https://github.com/gnolang/gno/tree/master/examples)
+  - ### Creating a GRC20 token
+  - ### Connecting a Go app to gno.land
+  - ### Connecting a JS/TS app to gno.land
+ 
 ## Concepts
-  - Realms
-  - Pure Packages
-  - Package paths
-  - Namespaces
-  - gno.land networks
-  - Tendermint2 overview
-  - GnoVM overview
-  - Portal Loop
+  - ### Realms
+  - ### Pure Packages
+  - ### Package paths
+  - ### Namespaces
+  - ### gno.land networks
+  - ### Tendermint2 overview
+  - ### GnoVM overview
+  - ### Portal Loop
 
 ## Misc (better name or make into a no-name section)
-  - Glossary
-  - FAQ
-  - Effective Gno
-  - gnolang/workshops
-  - awesome-gno
-  - Links (events calendar, discord, telegram, youtube)
+  - ### Glossary
+  - ### FAQ
+  - ### Effective Gno
+  - ### gnolang/workshops
+  - ### awesome-gno
+  - ### Links (events calendar, discord, telegram, youtube)
 
 ## Reference
-  - Network config
-  - Go-Gno compat
-  - `std` reference
-  - Clients & Tools (links)
-    - gnoclient
-    - tm2-js
-    - gno-js
-    - gnoland
-    - tx-indexer
-    - tx-archive
-    - tx-exports
-  
- Items that need (re)writing or modifying
+  - ### Network config
+  - ### Go-Gno compat
+  - ### `std` reference
+  - ### Clients & Tools (links)
+    - #### gnoclient
+    - #### tm2-js
+    - #### gno-js
+    - #### gnoland
+    - #### tx-indexer
+    - #### tx-archive
+    - #### tx-exports
