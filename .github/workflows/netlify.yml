@@ -30,7 +30,7 @@ jobs:
       env:
         MEILISEARCH_URL: "https://docs-search.gnoteam.com"
         MEILISEARCH_INDEX_UID: "production"
-        MEILISEARCH_API_KEY: "cf93b323b625c7825c4690aa16f7ebdfd8f433a021efa40f3b986e8cf4b6415e"
+        MEILISEARCH_API_KEY: "7a646d537285a92f436b8f2fc000e1482eb82a563f0372e210a3535764338cd7"
 
     - name: Deploy to netlify
       uses: netlify/actions/cli@master
