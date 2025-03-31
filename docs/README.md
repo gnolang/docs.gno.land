@@ -1,6 +1,6 @@
 # gno.land
 
-Welcome to the official documentation of gno.land.
+## Welcome to the official documentation of gno.land.
 
 gno.land is a smart contract platform built on a novel interpretation of Go
 (Golang) for blockchain, created to enable powerful, modular, and secure

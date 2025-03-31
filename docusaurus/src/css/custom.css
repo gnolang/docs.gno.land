@@ -372,7 +372,11 @@ display: none;
     box-shadow: none;
 }
 .container .card p {
-    display: none;;
+    display: none;
+}
+
+.docs-doc-id-README .container .markdown li a ~ code {
+    display: contents;
 }
 
 .container .card:hover {
@@ -424,9 +428,10 @@ display: none;
 
 .docs-doc-id-README .container .markdown a:not(.hash-link),
 .docs-doc-id-README .container .markdown strong {
-    display: inline-flex;
+    display:block;
     justify-content: space-between;
     width: 100%;
+    padding-inline-end: 4rem;
     padding-block: .6rem;
     color: var(--ifm-color-primary);
     text-decoration: none;
@@ -450,6 +455,9 @@ display: none;
 /* card hover */
 .docs-doc-id-README .container .markdown a:not(.hash-link)::after {
     content: "→";
+    position: absolute;
+    right: 1.5rem;
+    top: 2rem;
     display: block;
     margin-left: auto;
     transition: transform ease .2s;
@@ -510,22 +518,26 @@ display: none;
     width: 1.5em;
     height: 1.5em;
     background-size: contain;
+    background-repeat: no-repeat;
+    align-self: flex-start;
+    flex-shrink: 0;
     mix-blend-mode: difference;
 }
 
-.docs-doc-id-README h2#getting-started::before {
+.docs-doc-id-README h2#welcome-to-the-official-documentation-of-gnoland::before {
+    background-image: url('/img/icons/ico-book.svg ');
+}
+.docs-doc-id-README h2#build-on-gnoland::before {
     background-image: url('/img/icons/ico-box.svg');
 }
-.docs-doc-id-README h2#developer-guides::before {
-    background-image: url('/img/icons/ico-book.svg');
+.docs-doc-id-README h2#use-gnoland::before {
+    background-image: url('/img/icons/ico-document-code.svg');
 }
 .docs-doc-id-README h2#concepts::before {
     background-image: url('/img/icons/ico-document-code.svg');
 }
-.docs-doc-id-README h2#misc::before {
-    background-image: url('/img/icons/ico-items.svg');
-}
-.docs-doc-id-README h2#reference::before {
+
+.docs-doc-id-README h2#resources::before {
     background-image: url('/img/icons/ico-hashtag.svg');
 }
 
