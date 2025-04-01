@@ -3,7 +3,7 @@
 const fs = require("fs")
 
 /** @type {string} */
-const file = fs.readFileSync("../docs/_assets/sidebar.json", "utf8")
+const file = fs.readFileSync("../docs/sidebar.json", "utf8")
 
 const sidebars = JSON.parse(file)
 
