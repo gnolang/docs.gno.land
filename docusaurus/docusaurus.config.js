@@ -1,12 +1,13 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const lightCodeTheme = require("prism-react-renderer").themes.jettwaveLight;
+const darkCodeTheme = require("prism-react-renderer").themes.jettwaveDark;
+const remarkTabbedCodeBlock = require("./src/remark/tabbed-code-block");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Gno.land Documentation",
+  title: "gno.land Documentation",
   favicon: "img/favicon.ico",
   url: "https://docs.gno.land",
   baseUrl: "/",
@@ -28,7 +29,24 @@ const config = {
     meilisearchIndexUid: process.env.MEILISEARCH_INDEX_UID || "dev",
   },
 
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        as: "image",
+        href: "/img/gnoland-bg@2x.avif",
+      },
+    },
+  ],
+
   scripts: [
+    {
+      src: "https://storage.googleapis.com/tendermintproduct.appspot.com/gs-playground/0.3.0/dist/gs-playground.bundle.js",
+      type: "module",
+      async: true,
+      defer: true,
+    },
     {
       // 100% privacy-first analytics
       src: "https://sa.gno.services/latest.js",
@@ -47,7 +65,10 @@ const config = {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
-          editUrl: ({ docPath }) => `https://github.com/gnolang/gno/edit/master/docs/${docPath}`,
+          editUrl: ({ docPath }) =>
+            `https://github.com/gnolang/gno/edit/master/docs/${docPath}`,
+          sidebarCollapsed: false,
+          remarkPlugins: [remarkTabbedCodeBlock],
         },
         blog: false,
         theme: {
@@ -68,7 +89,7 @@ const config = {
       navbar: {
         hideOnScroll: true,
         logo: {
-          alt: "Gno.land Logo",
+          alt: "gno.land Logo",
           src: "img/gno-black-logo.svg",
           srcDark: "img/gno-white-logo.svg",
         },
