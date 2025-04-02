@@ -42,7 +42,7 @@ const config = {
 
   scripts: [
     {
-      src: "https://storage.googleapis.com/tendermintproduct.appspot.com/gs-playground/0.2.0/dist/gs-playground.bundle.js",
+      src: "https://storage.googleapis.com/tendermintproduct.appspot.com/gs-playground/0.3.0/dist/gs-playground.bundle.js",
       type: "module",
       async: true,
       defer: true,
