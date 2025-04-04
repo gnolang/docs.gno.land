@@ -16,10 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set Node.js 20.x
+    - name: Set Node.js 20.18
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: 20.18
 
     - name: Build docs.gno.land
       working-directory: ./docusaurus

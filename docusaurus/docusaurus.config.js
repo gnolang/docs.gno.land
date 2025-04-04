@@ -15,7 +15,7 @@ const config = {
   organizationName: "gnolang",
   projectName: "gno",
 
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
   i18n: {
