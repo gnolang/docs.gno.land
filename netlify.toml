@@ -17,7 +17,7 @@ package = "@netlify/plugin-lighthouse"
 
 [build.environment]
   # Environment variables are set here
-  NODE_VERSION = "20"
+NODE_VERSION = "20.18"
 
 # [[headers]]
 #   # Define which paths this specific [[headers]] block will cover.
