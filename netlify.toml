@@ -1,6 +1,5 @@
 [build]
 base = "docusaurus"
-NODE_VERSION = "20.18"
 
 publish = "build"
 
@@ -13,9 +12,12 @@ MEILISEARCH_INDEX_UID = "production"
 #curl https://docs-search.gnoteam.com/keys -H "Authorization: Bearer $MEILI_MASTER_KEY"       
 MEILISEARCH_API_KEY = "7a646d537285a92f436b8f2fc000e1482eb82a563f0372e210a3535764338cd7"
 
+[build.environment]
+# Environment variables are set here
+NODE_VERSION = "20.18"
+
 [[plugins]]
 package = "@netlify/plugin-lighthouse"
-
 
 # [[headers]]
 #   # Define which paths this specific [[headers]] block will cover.
