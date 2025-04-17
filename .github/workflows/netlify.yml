@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - fix/mlsearch-key
 
 jobs:
   deploy-netlify:
@@ -20,22 +21,28 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 20.18
+    
+    - name: Gather Meilisearch APi Key from Netlify config file
+      run: |
+        API_KEY=$(grep 'MEILISEARCH_API_KEY' netlify.toml | cut -d '=' -f2 | tr -d ' "')
+        echo "MEILISEARCH_API_KEY=$API_KEY" >> "$GITHUB_ENV"
 
     - name: Build docs.gno.land
       working-directory: ./docusaurus
       run: |
-        yarn run download-docs
-        yarn install
-        yarn build
+        echo "$MEILISEARCH_API_KEY"####
+      # yarn run download-docs
+      # yarn install
+      # yarn build
       env:
         MEILISEARCH_URL: "https://docs-search.gnoteam.com"
         MEILISEARCH_INDEX_UID: "production"
-        MEILISEARCH_API_KEY: "7a646d537285a92f436b8f2fc000e1482eb82a563f0372e210a3535764338cd7"
+    #     MEILISEARCH_API_KEY: "7a646d537285a92f436b8f2fc000e1482eb82a563f0372e210a3535764338cd7"
 
-    - name: Deploy to netlify
-      uses: netlify/actions/cli@master
-      with:
-        args: deploy --site gno-docs --prod
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    # - name: Deploy to netlify
+    #   uses: netlify/actions/cli@master
+    #   with:
+    #     args: deploy --site gno-docs --prod
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
