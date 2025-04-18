@@ -6,25 +6,13 @@ on:
     workflows: ["Deploy docs to netlify"]
     types:
       - completed
-  push:
-    branches:
-      - fix/meilisearch-indexing
 
 jobs:
   indexing:
     runs-on: ubuntu-latest
-    name: Indexing
+    name: Meilisearch Indexing
     steps:
       - name: Pull and run container
         run: docker run -e CRAWLER_CONFIG="${CRAWLER_CONFIG}" getmeili/scrapix:v0.1.8
     env:
       CRAWLER_CONFIG: ${{ secrets.SCRAPIX_CONFIG }}
-    # container:
-    #   image: getmeili/scrapix:v0.1.8
-    #   env:
-    #     CRAWLER_CONFIG: ${{ secrets.SCRAPIX_CONFIG }}
-    # steps:
-    #   - name: Run default container command
-    #     run: |
-    #       ./start_xvfb_and_run_cmd.sh && yarn start:prod -- -c $CRAWLER_CONFIG \
-    #       -b /usr/bin/google-chrome --silent 
