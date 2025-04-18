@@ -14,24 +14,12 @@ jobs:
   indexing:
     runs-on: ubuntu-latest
     name: Indexing
+    container:
+      image: getmeili/scrapix:v0.1.8
+      env:
+        CRAWLER_CONFIG: ${{ secrets.SCRAPIX_CONFIG }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: 'meilisearch/scrapix'
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.x'
-
-      - name: Print base64-encoded secret
+      - name: Run default container command
         run: |
-          echo "${{ secrets.SCRAPIX_CONFIG }}" | base64
-        env:
-          SCRAPIX_CONFIG: ${{ secrets.SCRAPIX_CONFIG }}
-
-      # - run: yarn install
-
-      # - run: yarn start -c "${SCRAPIX_CONFIG}"
-      #   env:
-      #     SCRAPIX_CONFIG: ${{ secrets.SCRAPIX_CONFIG }}
+          ./start_xvfb_and_run_cmd.sh && yarn start:prod -- -c $CRAWLER_CONFIG \
+          -b /usr/bin/google-chrome --silent 
