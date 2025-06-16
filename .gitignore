@@ -1,3 +1,25 @@
 .netlify
 .idea
 docs
+
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.yarn-integrity
+
+# Misc
+.DS_Store
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

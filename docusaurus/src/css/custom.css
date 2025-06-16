@@ -123,6 +123,17 @@ body {
   font-size: 16.25px;
 }
 
+/* Sélection de texte */
+::selection {
+  background-color: var(--ifm-color-content);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--ifm-color-content);
+  color: white;
+}
+
 pre code {
   background-color: var(--ifm-code-background-color);
   border-radius: 1rem;
