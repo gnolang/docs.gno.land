@@ -123,7 +123,6 @@ body {
   font-size: 16.25px;
 }
 
-/* Sélection de texte */
 ::selection {
   background-color: var(--ifm-color-content);
   color: white;
