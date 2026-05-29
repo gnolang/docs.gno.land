@@ -18,6 +18,13 @@ const config = {
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
+  // Parse `.md` files as CommonMark (only `.mdx` uses MDX). This makes the
+  // monorepo docs immune to MDX parsing errors from literal `{...}` / `<...>`
+  // in prose (e.g. CONSTITUTION.md), which previously broke the production build.
+  markdown: {
+    format: "detect",
+  },
+
   i18n: {
     defaultLocale: "en",
     locales: ["en"],
