@@ -19,6 +19,52 @@ NODE_VERSION = "20.18"
 [[plugins]]
 package = "@netlify/plugin-lighthouse"
 
+# Redirects for builder docs paths that changed in gnolang/gno#5656.
+# These old URLs are indexed and linked externally, so they 301 to their
+# new homes instead of 404ing. Update or extend when docs paths move again.
+
+# Deleted pages, content folded into other guides.
+[[redirects]]
+  from = "/builders/anatomy-of-a-gno-package"
+  to = "/builders/getting-started"
+  status = 301
+
+[[redirects]]
+  from = "/builders/deploy-packages"
+  to = "/builders/getting-started"
+  status = 301
+
+[[redirects]]
+  from = "/builders/local-dev-with-gnodev"
+  to = "/resources/gnodev"
+  status = 301
+
+# Renamed pages.
+[[redirects]]
+  from = "/builders/what-is-gnolang"
+  to = "/builders/what-is-gno"
+  status = 301
+
+[[redirects]]
+  from = "/builders/quick-start"
+  to = "/builders/quickstart"
+  status = 301
+
+[[redirects]]
+  from = "/builders/connect-clients-and-apps"
+  to = "/builders/rpc-clients"
+  status = 301
+
+[[redirects]]
+  from = "/builders/become-a-gnome"
+  to = "/builders/contributor-guide"
+  status = 301
+
+[[redirects]]
+  from = "/builders/example-minisocial-dapp"
+  to = "/builders/tutorial-minisocial"
+  status = 301
+
 # [[headers]]
 #   # Define which paths this specific [[headers]] block will cover.
 #   for = "/*"
