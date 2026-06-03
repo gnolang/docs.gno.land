@@ -23,46 +23,45 @@ package = "@netlify/plugin-lighthouse"
 # These old URLs are indexed and linked externally, so they 301 to their
 # new homes instead of 404ing. Update or extend when docs paths move again.
 
+# The `to` paths carry a trailing slash because the site canonicalizes to one
+# (e.g. /builders/getting-started 301s to /builders/getting-started/); matching
+# it here keeps each redirect a single hop instead of chaining two 301s.
+
 # Deleted pages, content folded into other guides.
 [[redirects]]
   from = "/builders/anatomy-of-a-gno-package"
-  to = "/builders/getting-started"
+  to = "/builders/getting-started/"
   status = 301
 
 [[redirects]]
   from = "/builders/deploy-packages"
-  to = "/builders/getting-started"
+  to = "/builders/getting-started/"
   status = 301
 
 [[redirects]]
   from = "/builders/local-dev-with-gnodev"
-  to = "/resources/gnodev"
+  to = "/resources/gnodev/"
   status = 301
 
 # Renamed pages.
 [[redirects]]
   from = "/builders/what-is-gnolang"
-  to = "/builders/what-is-gno"
-  status = 301
-
-[[redirects]]
-  from = "/builders/quick-start"
-  to = "/builders/quickstart"
+  to = "/builders/what-is-gno/"
   status = 301
 
 [[redirects]]
   from = "/builders/connect-clients-and-apps"
-  to = "/builders/rpc-clients"
+  to = "/builders/rpc-clients/"
   status = 301
 
 [[redirects]]
   from = "/builders/become-a-gnome"
-  to = "/builders/contributor-guide"
+  to = "/builders/contributor-guide/"
   status = 301
 
 [[redirects]]
   from = "/builders/example-minisocial-dapp"
-  to = "/builders/tutorial-minisocial"
+  to = "/builders/tutorial-minisocial/"
   status = 301
 
 # [[headers]]
