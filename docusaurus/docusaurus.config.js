@@ -1,9 +1,16 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const path = require("node:path");
+
 const lightCodeTheme = require("prism-react-renderer").themes.jettwaveLight;
 const darkCodeTheme = require("prism-react-renderer").themes.jettwaveDark;
 const remarkTabbedCodeBlock = require("./src/remark/tabbed-code-block");
+const remarkExternalRepoLinks = require("./src/remark/external-repo-links");
+
+// The folder scripts/download-docs.sh puts the monorepo docs in, shared by the
+// docs preset and by the plugin that rewrites the links leaving it
+const docsDir = path.resolve(__dirname, "../docs");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -68,14 +75,17 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: "../docs",
+          path: docsDir,
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
           editUrl: ({ docPath }) =>
             `https://github.com/gnolang/gno/edit/master/docs/${docPath}`,
           sidebarCollapsed: false,
-          remarkPlugins: [remarkTabbedCodeBlock],
+          remarkPlugins: [
+            remarkTabbedCodeBlock,
+            [remarkExternalRepoLinks, { docsDir }],
+          ],
         },
         blog: false,
         theme: {
