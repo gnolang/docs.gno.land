@@ -8,8 +8,10 @@ const darkCodeTheme = require("prism-react-renderer").themes.jettwaveDark;
 const remarkTabbedCodeBlock = require("./src/remark/tabbed-code-block");
 const remarkExternalRepoLinks = require("./src/remark/external-repo-links");
 
-// The folder scripts/download-docs.sh puts the monorepo docs in, shared by the
-// docs preset and by the plugin that rewrites the links leaving it
+// Where the docs come from: scripts/download-docs.sh downloads this branch of
+// this repository and puts its docs folder here
+const repoURL = "https://github.com/gnolang/gno";
+const repoRef = "master";
 const docsDir = path.resolve(__dirname, "../docs");
 
 /** @type {import('@docusaurus/types').Config} */
@@ -79,12 +81,11 @@ const config = {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
-          editUrl: ({ docPath }) =>
-            `https://github.com/gnolang/gno/edit/master/docs/${docPath}`,
+          editUrl: ({ docPath }) => `${repoURL}/edit/${repoRef}/docs/${docPath}`,
           sidebarCollapsed: false,
           remarkPlugins: [
             remarkTabbedCodeBlock,
-            [remarkExternalRepoLinks, { docsDir }],
+            [remarkExternalRepoLinks, { docsDir, repoURL, repoRef }],
           ],
         },
         blog: false,

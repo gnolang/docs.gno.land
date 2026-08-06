@@ -1,31 +1,25 @@
 import path from "node:path";
 import { visit } from "unist-util-visit";
 
-// The docs folder is the only part of the monorepo this site holds:
-// scripts/download-docs.sh keeps gno-master/docs and drops the rest. A link
-// climbing out of it therefore has no page to point at, and Docusaurus emits it
-// verbatim, so `../../examples/gno.land/p/nt/avl/v0` ships as
-// `/examples/gno.land/p/nt/avl/v0` and returns 404. Those targets are real
-// files in the monorepo, so the link becomes a URL to the monorepo instead.
-const repoURL = "https://github.com/gnolang/gno";
-
-// The branch download-docs.sh pulls the docs from
-const repoRef = "master";
-
 /**
  * Rewrites every relative link that resolves outside the docs folder into an
  * absolute GitHub URL, leaving the markdown sources relative.
  *
- * The source file keeps `[avl](../../examples/gno.land/p/nt/avl/v0)`, which
- * resolves in the monorepo and on GitHub. The built page carries
- * `https://github.com/gnolang/gno/tree/master/examples/gno.land/p/nt/avl/v0`.
+ * The docs folder is the only part of the monorepo this site holds, so a link
+ * climbing out of it has no page to point at and Docusaurus emits it verbatim:
+ * `../../examples/gno.land/p/nt/avl/v0` ships as
+ * `/examples/gno.land/p/nt/avl/v0` and returns 404. The target is a real file
+ * in the monorepo, so the built page points there instead, at
+ * `https://github.com/gnolang/gno/tree/master/examples/gno.land/p/nt/avl/v0`,
+ * while the markdown keeps the relative link that resolves in a checkout.
  *
- * @param {{docsDir: string}} options docsDir is the folder Docusaurus reads the
- * docs from, matching the `path` of the docs preset.
+ * @param {{docsDir: string, repoURL: string, repoRef: string}} options docsDir
+ * matches the `path` of the docs preset, and repoURL and repoRef name the
+ * repository and branch the docs were downloaded from.
  */
-export default function externalRepoLinks({ docsDir } = {}) {
-  if (!docsDir) {
-    throw new Error("external-repo-links: docsDir is required, and must match the docs preset path");
+export default function externalRepoLinks({ docsDir, repoURL, repoRef } = {}) {
+  if (!docsDir || !repoURL || !repoRef) {
+    throw new Error("external-repo-links: docsDir, repoURL and repoRef are all required");
   }
 
   const docsRoot = path.resolve(docsDir);
@@ -36,17 +30,19 @@ export default function externalRepoLinks({ docsDir } = {}) {
     const fileDir = path.dirname(path.resolve(file.path));
 
     visit(tree, ["link", "definition"], (node) => {
-      const url = externalRepoURL(node.url, fileDir, docsRoot);
-      if (url) node.url = url;
+      const repoPath = externalRepoPath(node.url, fileDir, docsRoot, repoRef);
+      if (!repoPath) return;
+
+      node.url = `${repoURL}/${repoPath}`;
     });
   };
 }
 
 /**
- * Returns the GitHub URL for a link that leaves the docs folder, or null for
- * one the site can resolve on its own.
+ * Returns the `<kind>/<ref>/<path>` a link leaving the docs folder addresses in
+ * the monorepo, or null for one the site can resolve on its own.
  */
-function externalRepoURL(url, fileDir, docsDir) {
+function externalRepoPath(url, fileDir, docsDir, repoRef) {
   if (!url || !isRelative(url)) return null;
 
   const [target, suffix] = splitTarget(url);
@@ -66,7 +62,7 @@ function externalRepoURL(url, fileDir, docsDir) {
   // but /blob/ is the URL a reader recognises.
   const kind = path.extname(repoPath) ? "blob" : "tree";
 
-  return `${repoURL}/${kind}/${repoRef}/${repoPath}${suffix}`;
+  return `${kind}/${repoRef}/${repoPath}${suffix}`;
 }
 
 // A link is relative when it addresses a path from the file holding it: not a
