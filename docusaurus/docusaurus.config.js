@@ -14,7 +14,8 @@ const repo = "gnolang/gno";
 const repoRef = "master";
 const repoURL = `https://github.com/${repo}`;
 const rawURL = `https://raw.githubusercontent.com/${repo}`;
-const docsDir = path.resolve(__dirname, "../docs");
+const docsPath = "docs";
+const docsDir = path.resolve(__dirname, "..", docsPath);
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -83,10 +84,10 @@ const config = {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
-          editUrl: ({ docPath }) => `${repoURL}/edit/${repoRef}/docs/${docPath}`,
+          editUrl: ({ docPath }) => `${repoURL}/edit/${repoRef}/${docsPath}/${docPath}`,
           sidebarCollapsed: false,
           beforeDefaultRemarkPlugins: [
-            [remarkExternalRepoLinks, { docsDir, repoURL, rawURL, repoRef }],
+            [remarkExternalRepoLinks, { docsDir, docsPath, repoURL, rawURL, repoRef }],
           ],
           remarkPlugins: [remarkTabbedCodeBlock],
         },

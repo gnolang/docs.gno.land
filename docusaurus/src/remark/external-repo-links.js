@@ -13,13 +13,14 @@ const HTML_URL = /\b(href|src)=("|')(.*?)\2/g;
  *
  * Register under `beforeDefaultRemarkPlugins`.
  *
- * @param {{docsDir: string, repoURL: string, rawURL: string, repoRef: string}}
- * options docsDir matches the `path` of the docs preset, and the rest name the
+ * @param {{docsDir: string, docsPath: string, repoURL: string, rawURL: string,
+ * repoRef: string}} options docsDir matches the `path` of the docs preset,
+ * docsPath is where that folder sits in the repository, and the rest name the
  * repository and branch the docs were downloaded from.
  */
-export default function externalRepoLinks({ docsDir, repoURL, rawURL, repoRef } = {}) {
-  if (!docsDir || !repoURL || !rawURL || !repoRef) {
-    throw new Error("external-repo-links: docsDir, repoURL, rawURL and repoRef are all required");
+export default function externalRepoLinks({ docsDir, docsPath, repoURL, rawURL, repoRef } = {}) {
+  if (!docsDir || !docsPath || !repoURL || !rawURL || !repoRef) {
+    throw new Error("external-repo-links: every option is required");
   }
 
   const docsRoot = path.resolve(docsDir);
@@ -40,15 +41,17 @@ export default function externalRepoLinks({ docsDir, repoURL, rawURL, repoRef } 
       const [, target, suffix] = url.match(/^([^?#]*)(.*)$/);
 
       // Relative paths only.
-      if (!target || /^([a-z][a-z0-9+.-]*:|\/\/|\/)/i.test(target)) return null;
+      if (!target || /^([a-z][a-z0-9+.-]*:|\/)/i.test(target)) return null;
 
-      const [up, ...rest] = path.relative(docsRoot, path.resolve(fileDir, target)).split(path.sep);
+      const fromDocs = path.relative(docsRoot, path.resolve(fileDir, target)).split(path.sep).join("/");
 
-      // One level above the docs folder is the repository root, two is outside
-      // the repository.
-      if (up !== ".." || !rest.length || rest[0] === "..") return null;
+      // Inside the docs folder the site resolves the link itself.
+      if (!fromDocs.startsWith("../")) return null;
 
-      const repoPath = rest.join("/");
+      // Above the repository root nothing can be addressed.
+      const repoPath = path.posix.join(docsPath, fromDocs);
+      if (repoPath.startsWith("../")) return null;
+
       if (isImage) return `${rawURL}/${repoRef}/${repoPath}${suffix}`;
 
       // A path carrying an extension is a file.
@@ -69,7 +72,11 @@ export default function externalRepoLinks({ docsDir, repoURL, rawURL, repoRef } 
         return;
       }
 
-      const rewritten = urlFor(node.url, node.type === "image" || imageIdentifiers.has(node.identifier));
+      const isImage =
+        node.type === "image" ||
+        (node.type === "definition" && imageIdentifiers.has(node.identifier));
+
+      const rewritten = urlFor(node.url, isImage);
       if (rewritten) node.url = rewritten;
     });
   };
