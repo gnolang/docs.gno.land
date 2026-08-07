@@ -13,6 +13,16 @@ import { visit } from "unist-util-visit";
  * `https://github.com/gnolang/gno/tree/master/examples/gno.land/p/nt/avl/v0`,
  * while the markdown keeps the relative link that resolves in a checkout.
  *
+ * An image needs the file itself rather than the page around it, so it goes to
+ * raw.githubusercontent.com. A `/blob/` URL answers with HTML and renders as a
+ * broken image.
+ *
+ * Register the plugin under `beforeDefaultRemarkPlugins`. Docusaurus resolves
+ * markdown links and reads images from disk before anything in `remarkPlugins`,
+ * so registered there it inherits a warning on every link it is about to fix
+ * and never sees an image at all: the build fails first on `Image ... not
+ * found`.
+ *
  * @param {{docsDir: string, repoURL: string, repoRef: string}} options docsDir
  * matches the `path` of the docs preset, and repoURL and repoRef name the
  * repository and branch the docs were downloaded from.
@@ -23,26 +33,55 @@ export default function externalRepoLinks({ docsDir, repoURL, repoRef } = {}) {
   }
 
   const docsRoot = path.resolve(docsDir);
+  const rawURL = repoURL.replace("https://github.com/", "https://raw.githubusercontent.com/");
 
   return (tree, file) => {
     if (!file.path) return;
 
     const fileDir = path.dirname(path.resolve(file.path));
 
-    visit(tree, ["link", "definition"], (node) => {
-      const repoPath = externalRepoPath(node.url, fileDir, docsRoot, repoRef);
-      if (!repoPath) return;
+    // A definition serves whichever reference names it, and only the reference
+    // says whether the target is read as a page or as an image.
+    const imageIdentifiers = new Set();
+    visit(tree, "imageReference", (node) => imageIdentifiers.add(node.identifier));
 
-      node.url = `${repoURL}/${repoPath}`;
+    const target = (url, isAsset) => {
+      const repoPath = externalRepoPath(url, fileDir, docsRoot);
+      if (!repoPath) return null;
+
+      return isAsset
+        ? `${rawURL}/${repoRef}/${repoPath}`
+        : `${repoURL}/${kindOf(repoPath)}/${repoRef}/${repoPath}`;
+    };
+
+    visit(tree, ["link", "image", "definition", "html"], (node) => {
+      // Raw HTML reaches the page as written, so the attributes are rewritten
+      // in the string itself.
+      if (node.type === "html") {
+        node.value = node.value.replace(
+          /\b(href|src)=("|')(.*?)\2/g,
+          (attribute, name, quote, url) => {
+            const rewritten = target(url, name === "src");
+
+            return rewritten ? `${name}=${quote}${rewritten}${quote}` : attribute;
+          },
+        );
+
+        return;
+      }
+
+      const isAsset = node.type === "image" || imageIdentifiers.has(node.identifier);
+      const rewritten = target(node.url, isAsset);
+      if (rewritten) node.url = rewritten;
     });
   };
 }
 
 /**
- * Returns the `<kind>/<ref>/<path>` a link leaving the docs folder addresses in
- * the monorepo, or null for one the site can resolve on its own.
+ * Returns the `<path>?<query>#<fragment>` a link leaving the docs folder
+ * addresses in the monorepo, or null for one the site can resolve on its own.
  */
-function externalRepoPath(url, fileDir, docsDir, repoRef) {
+function externalRepoPath(url, fileDir, docsDir) {
   if (!url || !isRelative(url)) return null;
 
   const [target, suffix] = splitTarget(url);
@@ -58,11 +97,13 @@ function externalRepoPath(url, fileDir, docsDir, repoRef) {
   const repoPath = segments.slice(1).join("/");
   if (!repoPath) return null;
 
-  // A path carrying an extension is a file. GitHub serves both under /tree/,
-  // but /blob/ is the URL a reader recognises.
-  const kind = path.extname(repoPath) ? "blob" : "tree";
+  return `${repoPath}${suffix}`;
+}
 
-  return `${kind}/${repoRef}/${repoPath}${suffix}`;
+// A path carrying an extension is a file. GitHub serves both under /tree/, but
+// /blob/ is the URL a reader recognises.
+function kindOf(repoPath) {
+  return path.extname(repoPath.replace(/[?#].*$/, "")) ? "blob" : "tree";
 }
 
 // A link is relative when it addresses a path from the file holding it: not a

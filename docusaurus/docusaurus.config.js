@@ -83,10 +83,10 @@ const config = {
           showLastUpdateTime: true,
           editUrl: ({ docPath }) => `${repoURL}/edit/${repoRef}/docs/${docPath}`,
           sidebarCollapsed: false,
-          remarkPlugins: [
-            remarkTabbedCodeBlock,
+          beforeDefaultRemarkPlugins: [
             [remarkExternalRepoLinks, { docsDir, repoURL, repoRef }],
           ],
+          remarkPlugins: [remarkTabbedCodeBlock],
         },
         blog: false,
         theme: {
