@@ -1,13 +1,13 @@
 import path from "node:path";
 import { visit } from "unist-util-visit";
 
-// `../x.md?plain=1#L3` -> `../x.md` and `?plain=1#L3`
+// Splits a URL into path and `?query#fragment`: `../x.md?plain=1#L3`
 const URL_PARTS = /^([^?#]*)(.*)$/;
 
-// `https://x`, `mailto:x`, `/x`: addressed from somewhere other than this file
+// Matches a URL that does not start from this file: `https://x`, `mailto:x`, `/x`
 const ABSOLUTE = /^([a-z][a-z0-9+.-]*:|\/)/i;
 
-// `href="../x"` or `src='../x'`: attribute name, quote, URL
+// Matches one URL attribute of an HTML tag: `href="../x"`, `src='../x'`
 const HTML_URL = /\b(href|src)=("|')(.*?)\2/g;
 
 /**
