@@ -1,7 +1,13 @@
 import path from "node:path";
 import { visit } from "unist-util-visit";
 
-// `href="..."` or `src='...'` in raw HTML: attribute name, quote, URL.
+// `../x.md?plain=1#L3` -> `../x.md` and `?plain=1#L3`
+const URL_PARTS = /^([^?#]*)(.*)$/;
+
+// `https://x`, `mailto:x`, `/x`: addressed from somewhere other than this file
+const ABSOLUTE = /^([a-z][a-z0-9+.-]*:|\/)/i;
+
+// `href="../x"` or `src='../x'`: attribute name, quote, URL
 const HTML_URL = /\b(href|src)=("|')(.*?)\2/g;
 
 /**
@@ -30,38 +36,36 @@ export default function externalRepoLinks({ docsDir, docsPath, repoURL, rawURL, 
 
     const fileDir = path.dirname(path.resolve(file.path));
 
-    // Which definitions an image reads, since the definition itself cannot say.
+    // `![x][logo]` -> `logo`, the definitions an image reads
     const imageIdentifiers = new Set();
     visit(tree, "imageReference", (node) => imageIdentifiers.add(node.identifier));
 
     const urlFor = (url, isImage) => {
       if (!url) return null;
 
-      // The path, then the ?query#fragment carried onto the built URL.
-      const [, target, suffix] = url.match(/^([^?#]*)(.*)$/);
+      const [, target, suffix] = url.match(URL_PARTS);
+      if (!target || ABSOLUTE.test(target)) return null;
 
-      // Relative paths only.
-      if (!target || /^([a-z][a-z0-9+.-]*:|\/)/i.test(target)) return null;
-
+      // in `docs/resources/a.md`, `../../misc/logo.png` -> `../misc/logo.png`
       const fromDocs = path.relative(docsRoot, path.resolve(fileDir, target)).split(path.sep).join("/");
 
-      // Inside the docs folder the site resolves the link itself.
+      // no `../`: inside the docs folder, the site resolves it
       if (!fromDocs.startsWith("../")) return null;
 
-      // Above the repository root nothing can be addressed.
+      // `../misc/logo.png` -> `misc/logo.png`, one more `../` is out of the repository
       const repoPath = path.posix.join(docsPath, fromDocs);
       if (repoPath.startsWith("../")) return null;
 
       if (isImage) return `${rawURL}/${repoRef}/${repoPath}${suffix}`;
 
-      // A path carrying an extension is a file.
+      // `avl/README.md` is a file, `avl` is a folder
       const kind = path.extname(repoPath) ? "blob" : "tree";
 
       return `${repoURL}/${kind}/${repoRef}/${repoPath}${suffix}`;
     };
 
     visit(tree, ["link", "image", "definition", "html"], (node) => {
-      // Raw HTML keeps its markup as a string.
+      // raw HTML keeps its markup as a string
       if (node.type === "html") {
         node.value = node.value.replace(HTML_URL, (attribute, name, quote, url) => {
           const rewritten = urlFor(url, name === "src");
