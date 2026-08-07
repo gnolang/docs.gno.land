@@ -20,13 +20,13 @@ const HTML_URL = /\b(href|src)=("|')(.*?)\2/g;
  * Register under `beforeDefaultRemarkPlugins`.
  *
  * @param {{docsDir: string, docsPath: string, repoURL: string, rawURL: string,
- * repoRef: string}} options docsDir matches the `path` of the docs preset,
- * docsPath is where that folder sits in the repository, and the rest name the
- * repository and branch the docs were downloaded from.
+ * repoRef: string}} settings all required. docsDir matches the `path` of the
+ * docs preset, docsPath is where that folder sits in the repository, and the
+ * rest name the repository and branch the docs were downloaded from.
  */
 export default function externalRepoLinks({ docsDir, docsPath, repoURL, rawURL, repoRef } = {}) {
-  if (!docsDir || !docsPath || !repoURL || !rawURL || !repoRef) {
-    throw new Error("external-repo-links: every option is required");
+  for (const [name, value] of Object.entries({ docsDir, docsPath, repoURL, rawURL, repoRef })) {
+    if (!value) throw new Error(`external-repo-links: ${name} is required`);
   }
 
   const docsRoot = path.resolve(docsDir);
