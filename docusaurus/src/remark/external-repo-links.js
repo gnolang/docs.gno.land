@@ -1,7 +1,7 @@
 import path from "node:path";
 import { visit } from "unist-util-visit";
 
-// Splits a URL into path and `?query#fragment`: `../x.md?plain=1#L3`
+// Splits a URL: `../x.md?plain=1#L3` -> `../x.md` + `?plain=1#L3`
 const URL_PARTS = /^([^?#]*)(.*)$/;
 
 // Matches a URL that does not start from this file: `https://x`, `mailto:x`, `/x`
