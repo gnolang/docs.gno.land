@@ -36,7 +36,7 @@ export default function externalRepoLinks({ docsDir, docsPath, repoURL, rawURL, 
 
     const fileDir = path.dirname(path.resolve(file.path));
 
-    // `![x][logo]` -> `logo`, the definitions an image reads
+    // Definitions an image reads: `![alt][logo]` + `[logo]: ../x.png` -> `logo`
     const imageIdentifiers = new Set();
     visit(tree, "imageReference", (node) => imageIdentifiers.add(node.identifier));
 
