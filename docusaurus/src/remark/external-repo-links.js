@@ -4,7 +4,7 @@ import { visit } from "unist-util-visit";
 // Splits a URL: `../x.md?plain=1#L3` -> `../x.md` + `?plain=1#L3`
 const URL_PARTS = /^([^?#]*)(.*)$/;
 
-// Matches a URL that does not start from this file: `https://x`, `mailto:x`, `/x`
+// Matches a URL that is not relative: `https://x`, `mailto:x`, `/x`
 const ABSOLUTE = /^([a-z][a-z0-9+.-]*:|\/)/i;
 
 // Matches one URL attribute of an HTML tag: `href="../x"`, `src='../x'`
@@ -36,7 +36,6 @@ export default function externalRepoLinks({ docsDir, docsPath, repoURL, rawURL, 
 
     const fileDir = path.dirname(path.resolve(file.path));
 
-    // Definitions an image reads: `![alt][logo]` + `[logo]: ../x.png` -> `logo`
     const imageIdentifiers = new Set();
     visit(tree, "imageReference", (node) => imageIdentifiers.add(node.identifier));
 
@@ -46,26 +45,28 @@ export default function externalRepoLinks({ docsDir, docsPath, repoURL, rawURL, 
       const [, target, suffix] = url.match(URL_PARTS);
       if (!target || ABSOLUTE.test(target)) return null;
 
-      // in `docs/resources/a.md`, `../../misc/logo.png` -> `../misc/logo.png`
+      // Target seen from the docs folder: `resources/a.md` + `../../misc/x` -> `../misc/x`
       const fromDocs = path.relative(docsRoot, path.resolve(fileDir, target)).split(path.sep).join("/");
 
-      // no `../`: inside the docs folder, the site resolves it
+      // No `../`: the target is inside the docs folder, the site resolves it
       if (!fromDocs.startsWith("../")) return null;
 
-      // `../misc/logo.png` -> `misc/logo.png`, one more `../` is out of the repository
+      // Same target from the repository root: `../misc/x` -> `misc/x`
       const repoPath = path.posix.join(docsPath, fromDocs);
+
+      // Still `../`: above the repository root, nothing to point at
       if (repoPath.startsWith("../")) return null;
 
       if (isImage) return `${rawURL}/${repoRef}/${repoPath}${suffix}`;
 
-      // `avl/README.md` is a file, `avl` is a folder
+      // Extension means a file: `file` -> blob, `directory` -> tree
       const kind = path.extname(repoPath) ? "blob" : "tree";
 
       return `${repoURL}/${kind}/${repoRef}/${repoPath}${suffix}`;
     };
 
     visit(tree, ["link", "image", "definition", "html"], (node) => {
-      // raw HTML keeps its markup as a string
+      // Raw HTML keeps its markup as a string
       if (node.type === "html") {
         node.value = node.value.replace(HTML_URL, (attribute, name, quote, url) => {
           const rewritten = urlFor(url, name === "src");
@@ -76,6 +77,7 @@ export default function externalRepoLinks({ docsDir, docsPath, repoURL, rawURL, 
         return;
       }
 
+      // `[logo]: ../x.png` is an image only when an `![alt][logo]` reads it
       const isImage =
         node.type === "image" ||
         (node.type === "definition" && imageIdentifiers.has(node.identifier));
