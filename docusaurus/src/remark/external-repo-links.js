@@ -1,28 +1,17 @@
 import path from "node:path";
 import { visit } from "unist-util-visit";
 
-// One URL-carrying attribute of a raw HTML tag, `href="../x"` or `src='../x'`.
-// The captures are the attribute name, the opening quote, and the URL up to the
-// same quote closing it.
+// `href="..."` or `src='...'` in raw HTML: attribute name, quote, URL.
 const HTML_URL = /\b(href|src)=("|')(.*?)\2/g;
 
 /**
- * Rewrites every relative link that resolves outside the docs folder into an
- * absolute GitHub URL, leaving the markdown sources relative.
+ * Rewrites a relative link that resolves outside the docs folder into an
+ * absolute URL on the monorepo, in `link`, `image`, `definition` and raw HTML
+ * nodes. An image goes to `rawURL`, anything else to `repoURL` under `blob` or
+ * `tree`. A link inside the docs folder, an absolute URL and a target above the
+ * repository root are left as written.
  *
- * The docs folder is the only part of the monorepo this site holds, so a link
- * climbing out of it has no page to point at and Docusaurus emits it verbatim:
- * `../../examples/gno.land/p/nt/avl/v0` ships as
- * `/examples/gno.land/p/nt/avl/v0` and returns 404. The built page points at
- * the monorepo instead, while the markdown keeps the relative link that
- * resolves in a checkout.
- *
- * An image goes to `rawURL`, everything else to `repoURL`, because a blob URL
- * answers with HTML and renders as a broken image.
- *
- * Register under `beforeDefaultRemarkPlugins`. Docusaurus resolves markdown
- * links and reads images off disk ahead of `remarkPlugins`, so a plugin
- * registered there runs too late to do either job.
+ * Register under `beforeDefaultRemarkPlugins`.
  *
  * @param {{docsDir: string, repoURL: string, rawURL: string, repoRef: string}}
  * options docsDir matches the `path` of the docs preset, and the rest name the
@@ -40,41 +29,36 @@ export default function externalRepoLinks({ docsDir, repoURL, rawURL, repoRef } 
 
     const fileDir = path.dirname(path.resolve(file.path));
 
-    // A definition serves whichever reference names it, and only the reference
-    // says whether the target is read as a page or as an image.
+    // Which definitions an image reads, since the definition itself cannot say.
     const imageIdentifiers = new Set();
     visit(tree, "imageReference", (node) => imageIdentifiers.add(node.identifier));
 
     const urlFor = (url, isImage) => {
       if (!url) return null;
 
-      // The path the link addresses, then the ?query#fragment that rides on the
-      // URL built from it.
+      // The path, then the ?query#fragment carried onto the built URL.
       const [, target, suffix] = url.match(/^([^?#]*)(.*)$/);
 
-      // Only a path relative to the file holding it can leave the docs folder.
+      // Relative paths only.
       if (!target || /^([a-z][a-z0-9+.-]*:|\/\/|\/)/i.test(target)) return null;
 
       const [up, ...rest] = path.relative(docsRoot, path.resolve(fileDir, target)).split(path.sep);
 
-      // In the monorepo the docs folder sits at the repository root, so a link
-      // climbing one level above it is addressed from that root. One climbing
-      // two levels leaves the repository and has no URL to build.
+      // One level above the docs folder is the repository root, two is outside
+      // the repository.
       if (up !== ".." || !rest.length || rest[0] === "..") return null;
 
       const repoPath = rest.join("/");
       if (isImage) return `${rawURL}/${repoRef}/${repoPath}${suffix}`;
 
-      // A path carrying an extension is a file. GitHub serves both under
-      // /tree/, but /blob/ is the URL a reader recognises.
+      // A path carrying an extension is a file.
       const kind = path.extname(repoPath) ? "blob" : "tree";
 
       return `${repoURL}/${kind}/${repoRef}/${repoPath}${suffix}`;
     };
 
     visit(tree, ["link", "image", "definition", "html"], (node) => {
-      // Raw HTML reaches the page as written, so the attributes are rewritten
-      // in the string itself.
+      // Raw HTML keeps its markup as a string.
       if (node.type === "html") {
         node.value = node.value.replace(HTML_URL, (attribute, name, quote, url) => {
           const rewritten = urlFor(url, name === "src");
