@@ -10,8 +10,10 @@ const remarkExternalRepoLinks = require("./src/remark/external-repo-links");
 
 // Where the docs come from: scripts/download-docs.sh downloads this branch of
 // this repository and puts its docs folder here
-const repoURL = "https://github.com/gnolang/gno";
+const repo = "gnolang/gno";
 const repoRef = "master";
+const repoURL = `https://github.com/${repo}`;
+const rawURL = `https://raw.githubusercontent.com/${repo}`;
 const docsDir = path.resolve(__dirname, "../docs");
 
 /** @type {import('@docusaurus/types').Config} */
@@ -84,7 +86,7 @@ const config = {
           editUrl: ({ docPath }) => `${repoURL}/edit/${repoRef}/docs/${docPath}`,
           sidebarCollapsed: false,
           beforeDefaultRemarkPlugins: [
-            [remarkExternalRepoLinks, { docsDir, repoURL, repoRef }],
+            [remarkExternalRepoLinks, { docsDir, repoURL, rawURL, repoRef }],
           ],
           remarkPlugins: [remarkTabbedCodeBlock],
         },
