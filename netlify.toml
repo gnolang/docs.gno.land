@@ -19,6 +19,29 @@ NODE_VERSION = "20.18"
 [[plugins]]
 package = "@netlify/plugin-lighthouse"
 
+# Short, stable aliases for the networks page.
+#
+# Testnets are renamed and replaced every few weeks (test13 -> topaz -> sapphire
+# -> pearl -> ...), so any doc, README or tutorial that hardcodes the current
+# testnet's hostname rots within a month or two. These aliases give every repo
+# outside the monorepo one URL it can link forever; the page behind them is the
+# thing that gets updated.
+
+[[redirects]]
+  from = "/testnets"
+  to = "/resources/gnoland-networks/"
+  status = 301
+
+[[redirects]]
+  from = "/testnet"
+  to = "/resources/gnoland-networks/"
+  status = 301
+
+[[redirects]]
+  from = "/networks"
+  to = "/resources/gnoland-networks/"
+  status = 301
+
 # Redirects for builder docs paths that changed in gnolang/gno#5656.
 # These old URLs are indexed and linked externally, so they 301 to their
 # new homes instead of 404ing. Update or extend when docs paths move again.
