@@ -1,9 +1,20 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const path = require("node:path");
+
 const lightCodeTheme = require("prism-react-renderer").themes.jettwaveLight;
 const darkCodeTheme = require("prism-react-renderer").themes.jettwaveDark;
 const remarkTabbedCodeBlock = require("./src/remark/tabbed-code-block");
+const remarkExternalRepoLinks = require("./src/remark/external-repo-links");
+
+// Where the docs come from: scripts/download-docs.sh downloads this branch of
+// this repository and puts its docs folder here
+const repo = "gnolang/gno";
+const repoRef = "master";
+const repoURL = `https://github.com/${repo}`;
+const docsPath = "docs";
+const docsDir = path.resolve(__dirname, "..", docsPath);
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -68,13 +79,15 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: "../docs",
+          path: docsDir,
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
-          editUrl: ({ docPath }) =>
-            `https://github.com/gnolang/gno/edit/master/docs/${docPath}`,
+          editUrl: ({ docPath }) => `${repoURL}/edit/${repoRef}/${docsPath}/${docPath}`,
           sidebarCollapsed: false,
+          beforeDefaultRemarkPlugins: [
+            [remarkExternalRepoLinks, { docsDir, docsPath, repoURL, repoRef }],
+          ],
           remarkPlugins: [remarkTabbedCodeBlock],
         },
         blog: false,
