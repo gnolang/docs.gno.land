@@ -33,7 +33,7 @@ jobs:
         yarn install
         yarn build
       env:
-        MEILISEARCH_URL: "https://docs-search.gnoteam.com"
+        MEILISEARCH_URL: "https://docs-search.gno.land"
         MEILISEARCH_INDEX_UID: "production"
 
     - name: Deploy to netlify
