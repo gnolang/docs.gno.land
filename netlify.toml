@@ -6,11 +6,12 @@ publish = "build"
 command = "yarn run download-docs && yarn build && yarn install"
 
 [context.production.environment]
-MEILISEARCH_URL = "https://docs-search.gnoteam.com"
+MEILISEARCH_URL = "https://docs-search.gno.land"
 MEILISEARCH_INDEX_UID = "production"
-# To generate this token, exec
-#curl https://docs-search.gnoteam.com/keys -H "Authorization: Bearer $MEILI_MASTER_KEY"       
-MEILISEARCH_API_KEY = "7a646d537285a92f436b8f2fc000e1482eb82a563f0372e210a3535764338cd7"
+# A search-only key (action: search, index: production) created on the
+# Meilisearch host by the infrastructure operators; it can do nothing an
+# anonymous visitor cannot already do, which is why it may sit here.
+MEILISEARCH_API_KEY = "4768407cf625886d79a670e7adbad23d8f74175562ead7526edf81d9c88cd79c"
 
 [build.environment]
 # Environment variables are set here
