@@ -88,6 +88,13 @@ package = "@netlify/plugin-lighthouse"
   to = "/builders/tutorial-minisocial/"
   status = 301
 
+# gnolang/gno#5873 splits the gnokey page into a wallet guide and a command
+# reference; the old URL goes to the guide.
+[[redirects]]
+  from = "/users/interact-with-gnokey"
+  to = "/users/using-gnokey/"
+  status = 301
+
 # [[headers]]
 #   # Define which paths this specific [[headers]] block will cover.
 #   for = "/*"
